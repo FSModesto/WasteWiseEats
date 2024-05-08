@@ -20,6 +20,24 @@ namespace WasteWiseEats_API.Application.AutoMapper
             CreateMap<DashboardFilterViewModel, DashboardFilter>();
 
             #endregion
+
+            #region DonationProposal
+
+            CreateMap<DonationProposalFilterViewModel, DonationProposalFilter>();
+
+            #endregion
+
+            #region WasteRegister
+
+            CreateMap<WasteRegisterFilterViewModel, WasteRegisterFilter>();
+
+            #endregion
+
+            #region Employee
+
+            CreateMap<EmployeeFilterViewModel, EmployeeFilter>();
+
+            #endregion
         }
     }
 }

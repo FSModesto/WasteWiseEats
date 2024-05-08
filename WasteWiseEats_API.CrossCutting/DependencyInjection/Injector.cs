@@ -29,15 +29,7 @@ namespace WasteWiseEats_API.CrossCutting.DependencyInjection
 
         private static void ConfigureAutoMapper(IServiceCollection services)
         {
-            var mapperConfig = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<ProfileToCommand>();
-                cfg.AddProfile<ProfileToViewModel>();
-                cfg.AddProfile<ProfileToModel>();
-            });
-
-            IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            services.AddAutoMapper(typeof(ProfileToCommand), typeof(ProfileToViewModel), typeof(ProfileToModel));
         }
 
         private static void AddJwtAuthentication(IServiceCollection services, IConfiguration configuration)

@@ -59,7 +59,7 @@ namespace WasteWiseEats_API.Application.AppServices
 
             PagedResult<Employee> employees = await _repository.GetFilteredByRestaurant(filter);
 
-            return Success(_mapper.Map<PagedResultViewModel<GetMinifiedEmployeesViewModel>>(employees.Results.OrderBy(o => o.Name)));
+            return Success(_mapper.Map<PagedResultViewModel<GetMinifiedEmployeesViewModel>>(employees));
         }
 
         public async Task<IResponse<Guid>> Update(UpdateEmployeeViewModel viewModel)

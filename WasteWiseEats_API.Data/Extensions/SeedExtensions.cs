@@ -94,6 +94,11 @@ namespace WasteWiseEats_API.Data.Extensions
                 ERole.CreateRestaurant,
                 ERole.DeleteRestaurant,
                 ERole.ReadRestaurant,
+                ERole.CreateWasteRegister,
+                ERole.UpdateWasteRegister,
+                ERole.DeleteWasteRegister,
+                ERole.ReadWasteRegister,
+                ERole.ListWasteRegisters,
             };
 
             List<SecurityProfileRole> roles = new();

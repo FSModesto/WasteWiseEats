@@ -56,7 +56,7 @@ namespace WasteWiseEats_API.Application.AppServices
         {
             IEnumerable<DonationCenter> donationCenters = await _repository.GetByStateAndTime(state, workingTime);
 
-            return Success(_mapper.Map<IEnumerable<GetMinifiedDonationCentersViewModel>>(donationCenters.OrderBy(o => o.Name)));
+            return Success(_mapper.Map<IEnumerable<GetMinifiedDonationCentersViewModel>>(donationCenters));
         }
 
         public async Task<IResponse<Guid>> Update(UpdateDonationCenterViewModel viewModel)

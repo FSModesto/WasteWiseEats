@@ -61,7 +61,7 @@ namespace WasteWiseEats_API.Application.AppServices
 
             PagedResult<WasteRegister> wasteRegisters = await _repository.GetFilteredByRestaurant(filter);
 
-            return Success(_mapper.Map<PagedResultViewModel<GetMinifiedWasteRegistersViewModel>>(wasteRegisters.Results.OrderByDescending(wh => wh.CreatedAt)));
+            return Success(_mapper.Map<PagedResultViewModel<GetMinifiedWasteRegistersViewModel>>(wasteRegisters));
         }
 
         public async Task<IResponse<Guid>> Update(UpdateWasteRegisterViewModel viewModel)

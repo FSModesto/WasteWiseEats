@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WasteWiseEats_API.Data.BaseContext;
 
@@ -11,9 +12,11 @@ using WasteWiseEats_API.Data.BaseContext;
 namespace WasteWiseEatsAPI.Data.Migrations
 {
     [DbContext(typeof(WasteWiseEatsContext))]
-    partial class WasteWiseEatsContextModelSnapshot : ModelSnapshot
+    [Migration("20240508122653_Include_Restaurant_roles")]
+    partial class IncludeRestaurantroles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

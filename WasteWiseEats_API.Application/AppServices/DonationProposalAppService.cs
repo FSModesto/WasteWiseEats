@@ -59,7 +59,7 @@ namespace WasteWiseEats_API.Application.AppServices
 
             PagedResult<DonationProposal> donationProposals = await _repository.GetFilteredByDonationCenter(filter);
 
-            return Success(_mapper.Map<PagedResultViewModel<GetMinifiedDonationProposalsViewModel>>(donationProposals.Results.OrderByDescending(o => o.CreatedAt)));
+            return Success(_mapper.Map<PagedResultViewModel<GetMinifiedDonationProposalsViewModel>>(donationProposals));
         }
 
         public async Task<IResponse> Accept(Guid id)
