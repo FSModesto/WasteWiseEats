@@ -15,6 +15,7 @@ namespace WasteWiseEats_API.CrossCutting.DependencyInjection
     {
         public static void InjectServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddHttpContextAccessor();
             AppServiceInjection.Inject(services);
             ContextInjection.Inject(services, configuration);
             RepositoryInjection.Inject(services);

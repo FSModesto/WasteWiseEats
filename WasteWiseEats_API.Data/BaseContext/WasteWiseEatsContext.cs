@@ -26,10 +26,13 @@ namespace WasteWiseEats_API.Data.BaseContext
             builder.ApplyConfiguration(new DonationCenterAddressMap());
             builder.ApplyConfiguration(new DonationProposalMap());
             builder.ApplyConfiguration(new UserMap());
+            builder.ApplyConfiguration(new SecurityProfileMap());
+            builder.ApplyConfiguration(new SecurityProfileRoleMap());
 
             builder.SetDefaultConfiguration();
             builder.SetSeed();
         }
+
         public DbSet<Restaurant> Users { get; set; }
 
         public DbSet<Restaurant> Restaurants { get; set; }

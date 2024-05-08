@@ -16,26 +16,6 @@ namespace WasteWiseEats_API.Data.Extensions
         /// <returns></returns>
         public static ModelBuilder SetSeed(this ModelBuilder builder)
         {
-            #region Users
-
-            //List<User> users = new()
-            //{
-            //    new()
-            //    {
-            //        Id = new Guid("9dfdf53a-1544-4b13-89af-0ba4a190bea1"),
-            //        Email = "felipesouzausjt@gmail.com.br",
-            //        Password = "F712B2EA259E2C6B3F63E43D8875A352",
-            //        Salt = "DAFC61E3E41217C44B15C83BEA44435C",
-            //        ProfileId = SecurityProfile.SUPER_USER_ID,
-            //        IsFirstAccess = false
-            //    }
-            //};
-
-            //builder.Entity<User>()
-            //       .HasData(users);
-
-            #endregion
-
             #region SecurityProfiles
 
             List<SecurityProfile> securityProfiles = new()
@@ -97,11 +77,6 @@ namespace WasteWiseEats_API.Data.Extensions
                 ERole.DeleteWasteRegister,
                 ERole.ReadWasteRegister,
                 ERole.ListWasteRegisters,
-                ERole.CreateWasteRegister,
-                ERole.UpdateWasteRegister,
-                ERole.DeleteWasteRegister,
-                ERole.ReadWasteRegister,
-                ERole.ListWasteRegisters
             };
 
             ERole[] restaurantOwnerRoles =
@@ -119,7 +94,6 @@ namespace WasteWiseEats_API.Data.Extensions
                 ERole.CreateRestaurant,
                 ERole.DeleteRestaurant,
                 ERole.ReadRestaurant,
-                ERole.DeleteRestaurant,
             };
 
             List<SecurityProfileRole> roles = new();
