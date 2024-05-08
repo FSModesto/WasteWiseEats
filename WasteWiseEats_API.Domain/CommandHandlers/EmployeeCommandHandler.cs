@@ -42,8 +42,10 @@ namespace WasteWiseEats_API.Domain.CommandHandlers
             User user = new()
             {
                 ProfileId = SecurityProfile.RESTAURANT_ATENDANT_ID,
+                Name = request.Name,
                 Email = request.Email,
                 Password = password,
+                Salt = salt,
                 IsFirstAccess = true,
                 IsExpired = false,
 

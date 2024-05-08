@@ -1,5 +1,6 @@
 ﻿using Konscious.Security.Cryptography;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -21,9 +22,10 @@ namespace WasteWiseEats_API.Domain.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly AuthenticationSettings? _settings;
 
-        public AuthenticationService(IHttpContextAccessor httpContextAccessor)
+        public AuthenticationService(IHttpContextAccessor httpContextAccessor, IOptions<AuthenticationSettings> options)
         {
             _httpContextAccessor = httpContextAccessor;
+            _settings = options?.Value;
         }
 
         public string GenereateSalt()

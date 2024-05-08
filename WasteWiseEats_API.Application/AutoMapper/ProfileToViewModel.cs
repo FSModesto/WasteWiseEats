@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using WasteWiseEats_API.Application.ViewModels.Responses.Authentications;
 using WasteWiseEats_API.Application.ViewModels.Responses.DonationCenter;
 using WasteWiseEats_API.Application.ViewModels.Responses.DonationProposal;
 using WasteWiseEats_API.Application.ViewModels.Responses.Employee;
@@ -8,6 +9,7 @@ using WasteWiseEats_API.Application.ViewModels.Responses.Restaurant;
 using WasteWiseEats_API.Application.ViewModels.Responses.SecurityProfiles;
 using WasteWiseEats_API.Application.ViewModels.Responses.WasteRegister;
 using WasteWiseEats_API.Domain.Entities;
+using WasteWiseEats_API.Domain.Models.Authentications;
 using WasteWiseEats_API.Domain.Models.Pagination;
 
 namespace WasteWiseEats_API.Application.AutoMapper
@@ -69,6 +71,13 @@ namespace WasteWiseEats_API.Application.AutoMapper
             #region SecurityProfile
 
             CreateMap<SecurityProfile, SecurityProfileViewModel>();
+
+            #endregion
+
+            #region User
+
+            CreateMap<Authenticated<AuthenticatedUser>, AuthenticatedViewModel<AuthenticatedUserViewModel>>();
+            CreateMap<AuthenticatedUser, AuthenticatedUserViewModel>();
 
             #endregion
         }

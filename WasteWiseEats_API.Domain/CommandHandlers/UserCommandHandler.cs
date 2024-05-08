@@ -31,17 +31,18 @@ namespace WasteWiseEats_API.Domain.CommandHandlers
             if (await _repository.Exists(wh => wh.Email == request.Email))
                 throw new ApiException(EApiException.EmailAlreadyExists);
 
-            string randomPassword = _authenticationService.GenerateRandomPassword();
             string salt = _authenticationService.GenereateSalt();
-            string password = _authenticationService.HashPassword(randomPassword, salt);
+            string password = _authenticationService.HashPassword(request.Password, salt);
 
             if (!await _securityProfileRepository.Exists(wh => wh.Id == request.ProfileId) || request.ProfileId == SecurityProfile.RESTAURANT_ATENDANT_ID)
                 throw new ApiException(EApiException.InvalidSecurityProfile);
 
             User user = new User()
             {
+                Name = request.Name,
                 Email = request.Email,
-                Password = request.Password,
+                Password = password,
+                Salt = salt,
                 ProfileId = request.ProfileId,
                 IsFirstAccess = true,
                 IsExpired = false

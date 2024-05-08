@@ -4,11 +4,13 @@ using WasteWiseEats_API.Application.ViewModels.Requests.DonationProposal;
 using WasteWiseEats_API.Application.ViewModels.Requests.Employee;
 using WasteWiseEats_API.Application.ViewModels.Requests.Food;
 using WasteWiseEats_API.Application.ViewModels.Requests.Restaurant;
+using WasteWiseEats_API.Application.ViewModels.Requests.User;
 using WasteWiseEats_API.Application.ViewModels.Requests.WasteRegister;
 using WasteWiseEats_API.Domain.CommandHandlers.Commands.DonationCenter;
 using WasteWiseEats_API.Domain.CommandHandlers.Commands.DonationProposal;
 using WasteWiseEats_API.Domain.CommandHandlers.Commands.Employee;
 using WasteWiseEats_API.Domain.CommandHandlers.Commands.Restaurant;
+using WasteWiseEats_API.Domain.CommandHandlers.Commands.User;
 using WasteWiseEats_API.Domain.CommandHandlers.Commands.WasteRegister;
 
 namespace WasteWiseEats_API.Application.AutoMapper
@@ -57,9 +59,18 @@ namespace WasteWiseEats_API.Application.AutoMapper
 
             #endregion
 
+
             #region Food
 
             CreateMap<FoodRequestViewModel, FoodSubCommand>();
+
+            #endregion
+
+
+            #region User
+
+            CreateMap<CreateUserViewModel, CreateUserCommand>();
+            CreateMap<LoginViewModel, UserAuthenticationCommand>();
 
             #endregion
         }
