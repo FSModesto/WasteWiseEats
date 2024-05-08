@@ -20,11 +20,11 @@ namespace WasteWiseEats_API.Domain.Entities
 
         public Guid ProfileId { get; set; }
 
-        public virtual Restaurant Restaurant { get; set; }
+        public virtual Restaurant? Restaurant { get; set; }
 
-        public virtual DonationCenter DonationCenter { get; set; }
+        public virtual DonationCenter? DonationCenter { get; set; }
 
-        public virtual Employee Employee { get; set; }
+        public virtual Employee? Employee { get; set; }
 
         public virtual SecurityProfile Profile { get; set; }
     }

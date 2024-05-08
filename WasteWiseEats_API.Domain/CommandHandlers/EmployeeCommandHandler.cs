@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using WasteWiseEats_API.Domain.CommandHandlers.Commands.Employee;
 using WasteWiseEats_API.Domain.Entities;
 using WasteWiseEats_API.Domain.Exceptions;
@@ -35,6 +36,9 @@ namespace WasteWiseEats_API.Domain.CommandHandlers
             string salt = _authenticationService.GenereateSalt();
             string password = _authenticationService.HashPassword(request.Document, salt);
 
+            User restaurantUser =
+                await _userRepository.Find(wh => wh.Id == _authenticationService.GetUserIdFromToken(), query => query.Include(i => i.Restaurant));
+
             User user = new()
             {
                 ProfileId = SecurityProfile.RESTAURANT_ATENDANT_ID,
@@ -45,7 +49,7 @@ namespace WasteWiseEats_API.Domain.CommandHandlers
 
                 Employee = new()
                 {
-                    //TODO:Atribuir restaurantId pelo BearerToken do User com Role.Restaurant
+                    RestaurantId = restaurantUser.Restaurant.Id,
                     Name = request.Name,
                     Document = request.Document,
                     Job = request.Job,

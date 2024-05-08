@@ -11,5 +11,7 @@ namespace WasteWiseEats_API.Domain.Interfaces.Services
         string HashPassword(string password, string salt);
 
         Authenticated<TContext> Authenticate<TContext>(TContext context) where TContext : IAuthenticationContext;
+
+        Guid GetUserIdFromToken();
     }
 }

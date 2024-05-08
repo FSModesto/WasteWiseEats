@@ -5,6 +5,7 @@ using WasteWiseEats_API.Domain.Entities;
 using WasteWiseEats_API.Domain.Exceptions;
 using WasteWiseEats_API.Domain.Exceptions.Enums;
 using WasteWiseEats_API.Domain.Interfaces.Repositories;
+using WasteWiseEats_API.Domain.Interfaces.Services;
 using WasteWiseEats_API.Domain.Models;
 
 namespace WasteWiseEats_API.Domain.CommandHandlers
@@ -14,19 +15,30 @@ namespace WasteWiseEats_API.Domain.CommandHandlers
                                             IRequestHandler<DeleteDonationCenterCommand, Unit>
     {
         private readonly IDonationCenterRepository _repository;
+        private readonly IUserRepository _userRepository;
+        private readonly IAuthenticationService _authenticationService;
 
-        public DonationCenterCommandHandler(IDonationCenterRepository repository)
+        public DonationCenterCommandHandler(IDonationCenterRepository repository, IAuthenticationService authenticationService, IUserRepository userRepository)
         {
             _repository = repository;
+            _authenticationService = authenticationService;
+            _userRepository = userRepository;
         }
 
         public async Task<Guid> Handle(CreateDonationCenterCommand request, CancellationToken cancellationToken)
         {
-            //TODO: Validar pelo User se o UserId já possui DonationCenter e disparar APIException
+            User user =
+                await _userRepository.Find(wh => wh.Id == _authenticationService.GetUserIdFromToken(), query => query.Include(i => i.Restaurant));
+
+            if (user is null)
+                throw new ApiException(EApiException.UserNotFound);
+
+            if (user.Restaurant is not null)
+                throw new ApiException(EApiException.UserAlreadyHasDonationCenter);
 
             DonationCenter donationCenter = new()
             {
-                //TODO: Atribuir UserId pelo Bearer retornado com o Role.DonationCenter
+                UserId = user.Id,
                 Name = request.Name,
                 Owner = request.Owner,
                 OwnerDocument = request.OwnerDocument,

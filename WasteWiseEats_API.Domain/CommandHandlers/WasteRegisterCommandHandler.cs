@@ -5,6 +5,7 @@ using WasteWiseEats_API.Domain.Entities;
 using WasteWiseEats_API.Domain.Exceptions;
 using WasteWiseEats_API.Domain.Exceptions.Enums;
 using WasteWiseEats_API.Domain.Interfaces.Repositories;
+using WasteWiseEats_API.Domain.Interfaces.Services;
 
 namespace WasteWiseEats_API.Domain.CommandHandlers
 {
@@ -15,17 +16,25 @@ namespace WasteWiseEats_API.Domain.CommandHandlers
                                 
     {
         private readonly IWasteRegisterRepository _repository;
+        private readonly IUserRepository _userRepository;
+        private readonly IAuthenticationService _authenticationService;
 
-        public WasteRegisterCommandHandler(IWasteRegisterRepository repository)
+        public WasteRegisterCommandHandler(IWasteRegisterRepository repository, IAuthenticationService authenticationService, IUserRepository userRepository)
         {
             _repository = repository;
+            _userRepository = userRepository;
+            _authenticationService = authenticationService;
         }
 
         public async Task<Guid> Handle(CreateWasteRegisterCommand request, CancellationToken cancellationToken)
         {
+            User employeeUser =
+                await _userRepository.Find(wh => wh.Id == _authenticationService.GetUserIdFromToken(), query => query.Include(i => i.Employee));
+
             WasteRegister wasteRegister = new()
             {
-                //TODO:RestaurantId e Employee deve ser resgatado pelo BearerToken
+                Employee = employeeUser.Name,
+                RestaurantId = employeeUser.Employee.RestaurantId,
                 HasDonated = false,
 
                 Foods = request.Foods.Select(food => new Food

@@ -55,6 +55,15 @@ namespace WasteWiseEats_API.Domain.Exceptions.Enums
         [StatusCodeError(HttpStatusCode.BadRequest, "Usuário inativo.")]
         InactiveUser = 52,
 
+        [StatusCodeError(HttpStatusCode.BadRequest, "Usuário já possui restaurante cadastrado.")]
+        UserAlreadyHasRestaurant = 53,
+
+        [StatusCodeError(HttpStatusCode.BadRequest, "Usuário já possui centro de doação cadastrado.")]
+        UserAlreadyHasDonationCenter = 54,
+
+        [StatusCodeError(HttpStatusCode.NotFound, "Usuário não encontrado.")]
+        UserNotFound = 55,
+
         #endregion
 
         #region Restaurant (6)

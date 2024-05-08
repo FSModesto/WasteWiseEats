@@ -1,6 +1,8 @@
 ﻿using Konscious.Security.Cryptography;
+using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using WasteWiseEats_API.Domain.Interfaces.Services;
@@ -16,7 +18,13 @@ namespace WasteWiseEats_API.Domain.Services
         private const int MEMORY_SIZE = 1024;
         private const int PARALLELISM = 2;
 
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly AuthenticationSettings? _settings;
+
+        public AuthenticationService(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
 
         public string GenereateSalt()
         {
@@ -79,6 +87,25 @@ namespace WasteWiseEats_API.Domain.Services
                 Type = "Bearer",
                 Context = context
             };
+        }
+
+        public Guid GetUserIdFromToken()
+        {
+            string authorizationHeader = _httpContextAccessor.HttpContext.Request.Headers["Authorization"];
+
+            string token = authorizationHeader.Substring("Bearer ".Length).Trim();
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var claimsPrincipal = tokenHandler.ValidateToken(token, new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_settings.JwtKey)),
+                ValidateIssuer = false,
+                ValidateAudience = false
+            }, out _);
+
+            return new Guid(claimsPrincipal.FindFirst(ClaimTypes.PrimarySid).Value);
         }
     }
 }
