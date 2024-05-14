@@ -12,21 +12,9 @@ Projeto para aplicativo de condomínio
 -Felipe de Souza Modesto
 
 ## Protótipo Figma
-https://www.figma.com/design/LnPZag8FD7Kedd27wz2lKr/PI-Parte-2?node-id=0-1&t=4U16qzDgBj5Gbb1R-0
+https://www.figma.com/design/LnPZag8FD7Kedd27wz2lKr/PI-Parte-2?node-id=0%3A1&t=YYIPUnhII67yWQh0-1
 
 ## *_Tecnologias Utilizadas_*
-
-FRONTEND
- - React (Utilizado como framework base)
-
-## Fluxo de Funcionamento Frontend
-- Instalar o Node.js v6.14.13
-- Baixar pasta WasteWiseEatsFrontend/wasteWiseEats
-- Abrir VSCode (ter instalado)
-- Abrir terminal no diretório do projeto "WasteWiseEatsFrontend/wasteWiseEats"
-- Executar o comando "npm install"
-- Executar o comando "npm start"
-
 
 BACKEND
  - .Net6.0 (Utilizado como framework base)
